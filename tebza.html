@@ -1,0 +1,2386 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Tebza Spaza | Student Convenience Store</title>
+
+<style>
+* {
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    color: #172019;
+    background: #f8faf9;
+}
+
+/* HEADER */
+
+header {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    background: white;
+    border-bottom: 1px solid #dfe6e1;
+}
+
+.navbar {
+    max-width: 1150px;
+    margin: auto;
+    height: 70px;
+    padding: 0 20px;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    color: #145c36;
+    font-size: 24px;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.navbar a {
+    color: #172019;
+    text-decoration: none;
+    margin-left: 20px;
+    font-size: 14px;
+}
+
+.navbar a:hover {
+    color: #145c36;
+}
+
+/* GENERAL */
+
+.container {
+    max-width: 1150px;
+    margin: auto;
+    padding: 0 20px;
+}
+
+section {
+    padding: 70px 20px;
+}
+
+.label {
+    color: #145c36;
+    font-size: 12px;
+    letter-spacing: 2px;
+    font-weight: bold;
+}
+
+h1 {
+    font-size: clamp(42px, 6vw, 72px);
+    line-height: 1;
+    margin: 15px 0;
+}
+
+h1 span {
+    color: #145c36;
+}
+
+h2 {
+    font-size: 35px;
+}
+
+p {
+    line-height: 1.6;
+}
+
+.muted {
+    color: #68756e;
+}
+
+/* HERO */
+
+.hero {
+    background: #edf5f0;
+    padding: 100px 20px;
+}
+
+.hero p {
+    max-width: 650px;
+    font-size: 18px;
+    color: #68756e;
+}
+
+.button {
+    display: inline-block;
+    border: none;
+    background: #145c36;
+    color: white;
+    padding: 13px 18px;
+    border-radius: 6px;
+    font-weight: bold;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.button:hover {
+    background: #0d4728;
+}
+
+.button.white {
+    background: white;
+    color: #145c36;
+    border: 1px solid #145c36;
+}
+
+/* PRODUCTS */
+
+.section-title {
+    display: flex;
+    justify-content: space-between;
+    align-items: end;
+    margin-bottom: 25px;
+}
+
+.search-area {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-bottom: 25px;
+}
+
+.search-area input {
+    flex: 1;
+    min-width: 230px;
+    padding: 13px;
+    border: 1px solid #d8e1db;
+    border-radius: 6px;
+}
+
+.category-buttons button {
+    padding: 10px 14px;
+    background: white;
+    border: 1px solid #d8e1db;
+    border-radius: 5px;
+    cursor: pointer;
+    margin: 3px;
+}
+
+.category-buttons button.active {
+    background: #145c36;
+    color: white;
+}
+
+.product-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 18px;
+}
+
+.product {
+    background: white;
+    border: 1px solid #dfe6e1;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.product-image {
+    width: 100%;
+    height: 210px;
+    object-fit: cover;
+    background: #edf5f0;
+}
+
+.product-info {
+    padding: 16px;
+}
+
+.product-info small {
+    color: #145c36;
+    font-weight: bold;
+}
+
+.product-info h3 {
+    margin: 8px 0;
+}
+
+.product-info p {
+    color: #68756e;
+}
+
+/* REQUEST */
+
+.green-section {
+    background: #edf5f0;
+}
+
+.two-column {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 45px;
+}
+
+.card {
+    background: white;
+    border: 1px solid #dfe6e1;
+    border-radius: 8px;
+    padding: 22px;
+}
+
+input,
+textarea,
+select {
+    width: 100%;
+    padding: 13px;
+    margin-bottom: 12px;
+    border: 1px solid #d8e1db;
+    border-radius: 6px;
+    font: inherit;
+}
+
+textarea {
+    min-height: 120px;
+    resize: vertical;
+}
+
+/* ASSISTANT */
+
+.chat {
+    min-height: 180px;
+}
+
+.message {
+    padding: 12px;
+    margin: 8px 0;
+    border-radius: 6px;
+    max-width: 80%;
+}
+
+.bot {
+    background: #edf5f0;
+}
+
+.user {
+    background: #145c36;
+    color: white;
+    margin-left: auto;
+}
+
+.chat-bar {
+    display: flex;
+    gap: 8px;
+    border-top: 1px solid #dfe6e1;
+    padding-top: 12px;
+}
+
+.chat-bar input {
+    margin: 0;
+}
+
+/* OWNER */
+
+.owner {
+    background: white;
+}
+
+.login-box {
+    max-width: 480px;
+}
+
+.hidden {
+    display: none !important;
+}
+
+.notice {
+    padding: 13px;
+    background: #edf5f0;
+    border-radius: 6px;
+    color: #145c36;
+    margin-bottom: 15px;
+}
+
+.owner-products {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 18px;
+}
+
+.owner-product {
+    border: 1px solid #dfe6e1;
+    border-radius: 8px;
+    padding: 15px;
+}
+
+.owner-product img {
+    width: 100%;
+    height: 160px;
+    object-fit: cover;
+    border-radius: 5px;
+}
+
+.owner-product small {
+    color: #145c36;
+    font-weight: bold;
+}
+
+.owner-actions {
+    display: flex;
+    gap: 7px;
+    flex-wrap: wrap;
+}
+
+.owner-actions button {
+    padding: 8px 11px;
+    border: 1px solid #d8e1db;
+    background: white;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.owner-actions .delete {
+    background: #7b2929;
+    color: white;
+}
+
+.request-card {
+    background: white;
+    border: 1px solid #dfe6e1;
+    border-radius: 7px;
+    padding: 15px;
+    margin: 10px 0;
+}
+
+.empty {
+    padding: 35px;
+    border: 1px dashed #cbd7cf;
+    color: #68756e;
+    grid-column: 1 / -1;
+}
+
+/* FOOTER */
+
+footer {
+    background: #101914;
+    color: #d8e0db;
+    padding: 25px 20px;
+}
+
+.footer-content {
+    max-width: 1150px;
+    margin: auto;
+    display: flex;
+    justify-content: space-between;
+}
+
+/* MOBILE */
+
+@media(max-width:900px) {
+
+    .product-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .owner-products {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .two-column {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media(max-width:550px) {
+
+    .product-grid,
+    .owner-products {
+        grid-template-columns: 1fr;
+    }
+
+    .navbar div {
+        display: none;
+    }
+
+    .section-title {
+        display: block;
+    }
+
+    .footer-content {
+        display: block;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- ================= HEADER ================= -->
+
+<header>
+
+<div class="navbar">
+
+<a href="#" class="logo">
+Tebza Spaza
+</a>
+
+<div>
+
+<a href="#products">Products</a>
+
+<a href="#request">
+Request Product
+</a>
+
+<a href="#assistant">
+Assistant
+</a>
+
+<a href="#owner">
+Owner
+</a>
+
+</div>
+
+</div>
+
+</header>
+
+
+<!-- ================= HERO ================= -->
+
+<section class="hero">
+
+<div class="container">
+
+<div class="label">
+STUDENT CONVENIENCE STORE
+</div>
+
+<h1>
+Order what you need.
+<br>
+
+<span>
+We'll try to source it.
+</span>
+
+</h1>
+
+<p>
+
+Tebza Spaza provides everyday convenience products,
+student books and student accessories.
+
+If we don't have the product,
+tell us what you need and we'll try to source it.
+
+</p>
+
+<a href="#products" class="button">
+View Products
+</a>
+
+</div>
+
+</section>
+
+
+<!-- ================= PRODUCTS ================= -->
+
+<section id="products">
+
+<div class="container">
+
+<div class="section-title">
+
+<div>
+
+<div class="label">
+VIRTUAL SHELF
+</div>
+
+<h2>
+Available Products
+</h2>
+
+</div>
+
+<div class="muted">
+Botshabelo J Section 2210
+</div>
+
+</div>
+
+
+<div class="search-area">
+
+<input
+type="text"
+id="search"
+placeholder="Search products..."
+oninput="displayProducts()"
+>
+
+<div id="categoryButtons"
+class="category-buttons">
+</div>
+
+</div>
+
+
+<div
+id="productGrid"
+class="product-grid">
+</div>
+
+</div>
+
+</section>
+
+
+<!-- ================= REQUEST PRODUCT ================= -->
+
+<section id="request" class="green-section">
+
+<div class="container two-column">
+
+<div>
+
+<div class="label">
+PRODUCT REQUEST
+</div>
+
+<h2>
+Can't find what you need?
+</h2>
+
+<p class="muted">
+
+Customers can request products that are not
+currently available on the virtual shelf.
+
+Describe the product as clearly as possible.
+
+For books, include the title, author and edition
+if you know them.
+
+</p>
+
+</div>
+
+
+<form
+id="requestForm"
+class="card"
+>
+
+<input
+id="customerName"
+required
+placeholder="Your name"
+>
+
+<input
+id="customerPhone"
+required
+placeholder="Your WhatsApp number"
+>
+
+<input
+id="requestedProduct"
+required
+placeholder="Product or book wanted"
+>
+
+<input
+id="requestedQuantity"
+type="number"
+min="1"
+value="1"
+required
+placeholder="Quantity"
+>
+
+<textarea
+id="requestedDescription"
+placeholder="Describe exactly what you want"
+></textarea>
+
+<button
+class="button"
+type="submit"
+>
+
+Send Request to WhatsApp
+
+</button>
+
+<p
+id="requestMessage"
+class="muted">
+</p>
+
+</form>
+
+</div>
+
+</section>
+
+
+<!-- ================= ASSISTANT ================= -->
+
+<section id="assistant">
+
+<div class="container">
+
+<div class="label">
+TEBZA ASSISTANT
+</div>
+
+<h2>
+Need help?
+</h2>
+
+
+<div
+class="card"
+style="max-width:760px"
+>
+
+<div
+id="chat"
+class="chat"
+>
+
+<div class="message bot">
+
+Hi. I can help you find groceries,
+student books and student accessories.
+
+If you cannot find something,
+you can request it from Tebza Spaza.
+
+</div>
+
+</div>
+
+
+<div class="chat-bar">
+
+<input
+id="assistantQuestion"
+placeholder="Ask something..."
+onkeydown="if(event.key==='Enter') askAssistant()"
+>
+
+<button
+class="button"
+onclick="askAssistant()"
+>
+
+Send
+
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- ================= OWNER ================= -->
+
+<section id="owner" class="owner">
+
+<div class="container">
+
+<div class="label">
+PRIVATE OWNER AREA
+</div>
+
+<h2>
+Owner Dashboard
+</h2>
+
+
+<!-- LOGIN -->
+
+<div
+id="loginBox"
+class="card login-box"
+>
+
+<div class="notice">
+
+This area is for Tebza Spaza management.
+
+</div>
+
+<input
+id="ownerUsername"
+placeholder="Username"
+>
+
+<input
+id="ownerPassword"
+type="password"
+placeholder="Password"
+>
+
+<button
+class="button"
+onclick="ownerLogin()"
+>
+
+Login
+
+</button>
+
+<p
+id="loginError"
+class="muted">
+</p>
+
+</div>
+
+
+<!-- DASHBOARD -->
+
+<div
+id="dashboard"
+class="hidden"
+>
+
+
+<div class="card">
+
+<div class="section-title">
+
+<div>
+
+<div class="label">
+CONTROL CENTRE
+</div>
+
+<h2>
+Manage Virtual Shelf
+</h2>
+
+</div>
+
+<button
+class="button white"
+onclick="logout()"
+>
+
+Lock Dashboard
+
+</button>
+
+</div>
+
+
+<div class="notice">
+
+Only products marked <strong>Visible</strong>
+are shown to customers.
+
+You can add, edit, hide, show and remove products.
+
+</div>
+
+
+<!-- ADD / EDIT -->
+
+<h3 id="formTitle">
+Add New Product
+</h3>
+
+
+<form id="productForm">
+
+<input
+id="productName"
+required
+placeholder="Product name"
+>
+
+
+<select id="productCategory">
+
+<option>
+Groceries
+</option>
+
+<option>
+Drinks
+</option>
+
+<option>
+Snacks
+</option>
+
+<option>
+Household
+</option>
+
+<option>
+Student Books
+</option>
+
+<option>
+Student Accessories
+</option>
+
+<option>
+Other
+</option>
+
+</select>
+
+
+<textarea
+id="productDescription"
+placeholder="Product description"
+></textarea>
+
+
+<label>
+
+<strong>
+Product photo
+</strong>
+
+</label>
+
+<br><br>
+
+<input
+id="productPhoto"
+type="file"
+accept="image/*"
+>
+
+
+<button
+class="button"
+type="submit"
+id="saveProductButton"
+>
+
+Add Product
+
+</button>
+
+
+<button
+class="button white hidden"
+type="button"
+id="cancelEditButton"
+onclick="cancelEdit()"
+>
+
+Cancel Edit
+
+</button>
+
+
+<p
+id="productMessage"
+class="muted">
+</p>
+
+</form>
+
+</div>
+
+
+<!-- OWNER SHELF -->
+
+<h3>
+Your Virtual Shelf
+</h3>
+
+<div
+id="ownerProducts"
+class="owner-products">
+</div>
+
+
+<!-- CUSTOMER REQUESTS -->
+
+<h3>
+Customer Requests
+</h3>
+
+<div
+id="customerRequests">
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- ================= FOOTER ================= -->
+
+<footer>
+
+<div class="footer-content">
+
+<div>
+© 2026 Tebza Spaza
+</div>
+
+<div>
+WhatsApp: 083 990 1003
+<br>
+Botshabelo J Section 2210
+</div>
+
+</div>
+
+</footer>
+
+
+<script>
+
+/* =====================================================
+   TEBZA SPAZA DATABASE
+   ===================================================== */
+
+const PRODUCT_DATABASE =
+"tebza_spaza_products";
+
+const REQUEST_DATABASE =
+"tebza_spaza_requests";
+
+const LOGIN_DATABASE =
+"tebza_spaza_owner_logged_in";
+
+
+/* OWNER LOGIN */
+
+const OWNER_USERNAME =
+"tebza";
+
+const OWNER_PASSWORD =
+"Tebza@2026!";
+
+
+/* PRODUCT LIST */
+
+let products =
+JSON.parse(
+localStorage.getItem(PRODUCT_DATABASE)
+) || [];
+
+
+/* EDITING */
+
+let editingProductId = null;
+
+
+/* CATEGORY */
+
+let selectedCategory = "All";
+
+
+/* =====================================================
+   STARTER PRODUCTS
+   ===================================================== */
+
+if(products.length === 0){
+
+products = [
+
+{
+id: Date.now()+1,
+name:"A4 Notebook",
+category:"Student Accessories",
+description:"Useful for lectures, notes and assignments.",
+image:"",
+visible:true
+},
+
+{
+id: Date.now()+2,
+name:"Scientific Calculator",
+category:"Student Accessories",
+description:"Useful for accounting, mathematics and science.",
+image:"",
+visible:true
+},
+
+{
+id: Date.now()+3,
+name:"Black Pens",
+category:"Student Accessories",
+description:"Everyday writing pens for students.",
+image:"",
+visible:true
+},
+
+{
+id: Date.now()+4,
+name:"Highlighters",
+category:"Student Accessories",
+description:"Useful for studying and revision.",
+image:"",
+visible:true
+},
+
+{
+id: Date.now()+5,
+name:"Student Textbook",
+category:"Student Books",
+description:"Request the exact title and edition if it is not available.",
+image:"",
+visible:true
+},
+
+{
+id: Date.now()+6,
+name:"Bottled Water",
+category:"Drinks",
+description:"Everyday refreshment.",
+image:"",
+visible:true
+},
+
+{
+id: Date.now()+7,
+name:"Cold Drink",
+category:"Drinks",
+description:"Everyday drink selection.",
+image:"",
+visible:true
+},
+
+{
+id: Date.now()+8,
+name:"Instant Noodles",
+category:"Groceries",
+description:"Quick student meal option.",
+image:"",
+visible:true
+}
+
+];
+
+saveProducts();
+
+}
+
+
+/* =====================================================
+   SAVE PRODUCTS
+   ===================================================== */
+
+function saveProducts(){
+
+localStorage.setItem(
+PRODUCT_DATABASE,
+JSON.stringify(products)
+);
+
+}
+
+
+/* =====================================================
+   ESCAPE TEXT
+   ===================================================== */
+
+function escapeHTML(text){
+
+const element =
+document.createElement("div");
+
+element.textContent =
+text || "";
+
+return element.innerHTML;
+
+}
+
+
+/* =====================================================
+   PLACEHOLDER
+   ===================================================== */
+
+function placeholderImage(){
+
+return "data:image/svg+xml;charset=UTF-8," +
+encodeURIComponent(
+
+"<svg xmlns='http://www.w3.org/2000/svg' width='800' height='500'>" +
+
+"<rect width='100%' height='100%' fill='#edf5f0'/>" +
+
+"<text x='50%' y='50%' " +
+
+"text-anchor='middle' " +
+
+"dominant-baseline='middle' " +
+
+"font-family='Arial' " +
+
+"font-size='30' " +
+
+"fill='#145c36'>" +
+
+"Tebza Spaza" +
+
+"</text>" +
+
+"</svg>"
+
+);
+
+}
+
+
+/* =====================================================
+   GET VISIBLE PRODUCTS
+   ===================================================== */
+
+function visibleProducts(){
+
+return products.filter(
+product => product.visible
+);
+
+}
+
+
+/* =====================================================
+   CATEGORY BUTTONS
+   ===================================================== */
+
+function displayCategories(){
+
+const container =
+document.getElementById(
+"categoryButtons"
+);
+
+const categories = [
+
+"All",
+
+...new Set(
+
+visibleProducts()
+.map(product =>
+product.category
+)
+
+)
+
+];
+
+container.innerHTML = "";
+
+
+categories.forEach(category => {
+
+const button =
+document.createElement("button");
+
+button.textContent =
+category;
+
+if(category === selectedCategory){
+
+button.classList.add("active");
+
+}
+
+button.onclick = function(){
+
+selectedCategory =
+category;
+
+displayCategories();
+
+displayProducts();
+
+};
+
+container.appendChild(button);
+
+});
+
+}
+
+
+/* =====================================================
+   DISPLAY CUSTOMER PRODUCTS
+   ===================================================== */
+
+function displayProducts(){
+
+const grid =
+document.getElementById(
+"productGrid"
+);
+
+const search =
+document.getElementById(
+"search"
+).value.toLowerCase();
+
+
+const filtered =
+visibleProducts().filter(product => {
+
+const matchesCategory =
+
+selectedCategory === "All" ||
+
+product.category ===
+selectedCategory;
+
+
+const matchesSearch =
+
+product.name
+.toLowerCase()
+.includes(search);
+
+
+return (
+matchesCategory &&
+matchesSearch
+);
+
+});
+
+
+grid.innerHTML = "";
+
+
+if(filtered.length === 0){
+
+grid.innerHTML = `
+
+<div class="empty">
+
+No matching products found.
+
+<br><br>
+
+You can use the
+<strong>Product Request</strong>
+section to ask Tebza to source it.
+
+</div>
+
+`;
+
+return;
+
+}
+
+
+filtered.forEach(product => {
+
+const article =
+document.createElement("article");
+
+article.className =
+"product";
+
+
+article.innerHTML = `
+
+<img
+
+class="product-image"
+
+src="${
+product.image ||
+placeholderImage()
+}"
+
+alt="${escapeHTML(product.name)}"
+
+>
+
+
+<div class="product-info">
+
+<small>
+
+${escapeHTML(product.category)}
+
+</small>
+
+
+<h3>
+
+${escapeHTML(product.name)}
+
+</h3>
+
+
+<p>
+
+${escapeHTML(product.description)}
+
+</p>
+
+
+<button
+
+class="button"
+
+onclick="requestThisProduct('${product.name.replace(/'/g,"\\'")}')"
+
+>
+
+Request This Product
+
+</button>
+
+</div>
+
+`;
+
+grid.appendChild(article);
+
+});
+
+}
+
+
+/* =====================================================
+   REQUEST THIS PRODUCT
+   ===================================================== */
+
+function requestThisProduct(name){
+
+document.getElementById(
+"requestedProduct"
+).value = name;
+
+
+document.getElementById(
+"request"
+).scrollIntoView({
+behavior:"smooth"
+});
+
+}
+
+
+/* =====================================================
+   CUSTOMER REQUEST
+   ===================================================== */
+
+document.getElementById(
+"requestForm"
+).addEventListener(
+"submit",
+function(event){
+
+event.preventDefault();
+
+
+const customer = {
+
+name:
+document.getElementById(
+"customerName"
+).value,
+
+phone:
+document.getElementById(
+"customerPhone"
+).value,
+
+product:
+document.getElementById(
+"requestedProduct"
+).value,
+
+quantity:
+document.getElementById(
+"requestedQuantity"
+).value,
+
+description:
+document.getElementById(
+"requestedDescription"
+).value ||
+
+"None",
+
+date:
+new Date().toLocaleString()
+
+};
+
+
+let requests =
+
+JSON.parse(
+localStorage.getItem(
+REQUEST_DATABASE
+)
+) || [];
+
+
+requests.unshift(customer);
+
+
+localStorage.setItem(
+REQUEST_DATABASE,
+JSON.stringify(requests)
+);
+
+
+/* WHATSAPP MESSAGE */
+
+const message =
+
+`TEBZA SPAZA PRODUCT REQUEST
+
+Customer: ${customer.name}
+
+WhatsApp: ${customer.phone}
+
+Product: ${customer.product}
+
+Quantity: ${customer.quantity}
+
+Description:
+${customer.description}
+
+Location:
+Botshabelo J Section 2210`;
+
+
+document.getElementById(
+"requestMessage"
+).textContent =
+"Opening WhatsApp...";
+
+
+window.open(
+
+"https://wa.me/27839901003?text=" +
+
+encodeURIComponent(message),
+
+"_blank"
+
+);
+
+
+renderCustomerRequests();
+
+
+}
+);
+
+
+/* =====================================================
+   AI-STYLE ASSISTANT
+   ===================================================== */
+
+function askAssistant(){
+
+const input =
+document.getElementById(
+"assistantQuestion"
+);
+
+const question =
+input.value.trim();
+
+
+if(!question){
+
+return;
+
+}
+
+
+const chat =
+document.getElementById(
+"chat"
+);
+
+
+chat.innerHTML += `
+
+<div class="message user">
+
+${escapeHTML(question)}
+
+</div>
+
+`;
+
+
+const q =
+question.toLowerCase();
+
+
+let answer;
+
+
+if(q.includes("book")){
+
+answer =
+
+"Look under Student Books. If the exact book is not available, use Product Request and give the title, author and edition.";
+
+}
+
+else if(
+q.includes("account") ||
+q.includes("study")
+){
+
+answer =
+
+"For accounting students, useful items include notebooks, calculators, pens and highlighters.";
+
+}
+
+else if(
+q.includes("pen") ||
+q.includes("stationery")
+){
+
+answer =
+
+"Check Student Accessories. If the item is not there, submit a product request.";
+
+}
+
+else if(
+q.includes("food") ||
+q.includes("eat")
+){
+
+answer =
+
+"Check the Groceries and Snacks categories for available products.";
+
+}
+
+else if(
+q.includes("drink")
+){
+
+answer =
+
+"Check the Drinks category.";
+
+}
+
+else{
+
+answer =
+
+"I can help you find groceries, drinks, student books and student accessories. If you cannot find something, submit a Product Request.";
+
+}
+
+
+chat.innerHTML += `
+
+<div class="message bot">
+
+${answer}
+
+</div>
+
+`;
+
+
+input.value = "";
+
+
+chat.scrollTop =
+chat.scrollHeight;
+
+}
+
+
+/* =====================================================
+   OWNER LOGIN
+   ===================================================== */
+
+function ownerLogin(){
+
+const username =
+document.getElementById(
+"ownerUsername"
+).value;
+
+const password =
+document.getElementById(
+"ownerPassword"
+).value;
+
+
+if(
+username === OWNER_USERNAME &&
+password === OWNER_PASSWORD
+){
+
+sessionStorage.setItem(
+LOGIN_DATABASE,
+"true"
+);
+
+openDashboard();
+
+}
+
+else{
+
+document.getElementById(
+"loginError"
+).textContent =
+"Incorrect username or password.";
+
+}
+
+}
+
+
+/* =====================================================
+   OPEN DASHBOARD
+   ===================================================== */
+
+function openDashboard(){
+
+document.getElementById(
+"loginBox"
+).classList.add(
+"hidden"
+);
+
+document.getElementById(
+"dashboard"
+).classList.remove(
+"hidden"
+);
+
+displayOwnerProducts();
+
+renderCustomerRequests();
+
+}
+
+
+/* =====================================================
+   LOGOUT
+   ===================================================== */
+
+function logout(){
+
+sessionStorage.removeItem(
+LOGIN_DATABASE
+);
+
+document.getElementById(
+"dashboard"
+).classList.add(
+"hidden"
+);
+
+document.getElementById(
+"loginBox"
+).classList.remove(
+"hidden"
+);
+
+}
+
+
+/* =====================================================
+   ADD / EDIT PRODUCT
+   ===================================================== */
+
+document.getElementById(
+"productForm"
+).addEventListener(
+"submit",
+function(event){
+
+event.preventDefault();
+
+
+const name =
+document.getElementById(
+"productName"
+).value.trim();
+
+
+const category =
+document.getElementById(
+"productCategory"
+).value;
+
+
+const description =
+document.getElementById(
+"productDescription"
+).value;
+
+
+const photo =
+document.getElementById(
+"productPhoto"
+).files[0];
+
+
+/* EXCLUDE BREAD */
+
+if(
+/bread|bakery/i.test(name)
+){
+
+document.getElementById(
+"productMessage"
+).textContent =
+"Bread and bakery products are excluded.";
+
+return;
+
+}
+
+
+/* IMAGE PROCESS */
+
+if(photo){
+
+if(photo.size > 5 * 1024 * 1024){
+
+document.getElementById(
+"productMessage"
+).textContent =
+"Please use an image smaller than 5 MB.";
+
+return;
+
+}
+
+
+const reader =
+new FileReader();
+
+
+reader.onload =
+function(){
+
+saveProduct(
+name,
+category,
+description,
+reader.result
+);
+
+};
+
+
+reader.readAsDataURL(photo);
+
+}
+
+else{
+
+saveProduct(
+name,
+category,
+description,
+""
+);
+
+}
+
+}
+);
+
+
+/* =====================================================
+   SAVE PRODUCT
+   ===================================================== */
+
+function saveProduct(
+name,
+category,
+description,
+image
+){
+
+if(editingProductId !== null){
+
+const product =
+products.find(
+p => p.id === editingProductId
+);
+
+
+product.name =
+name;
+
+product.category =
+category;
+
+product.description =
+description;
+
+
+if(image){
+
+product.image =
+image;
+
+}
+
+
+document.getElementById(
+"productMessage"
+).textContent =
+"Product updated.";
+
+}
+
+else{
+
+products.unshift({
+
+id: Date.now(),
+
+name:name,
+
+category:category,
+
+description:description,
+
+image:image,
+
+visible:true
+
+});
+
+
+document.getElementById(
+"productMessage"
+).textContent =
+"Product added to the virtual shelf.";
+
+}
+
+
+saveProducts();
+
+resetProductForm();
+
+displayCategories();
+
+displayProducts();
+
+displayOwnerProducts();
+
+}
+
+
+/* =====================================================
+   EDIT PRODUCT
+   ===================================================== */
+
+function editProduct(id){
+
+const product =
+products.find(
+p => p.id === id
+);
+
+
+if(!product){
+
+return;
+
+}
+
+
+editingProductId =
+id;
+
+
+document.getElementById(
+"formTitle"
+).textContent =
+"Edit Product";
+
+
+document.getElementById(
+"productName"
+).value =
+product.name;
+
+
+document.getElementById(
+"productCategory"
+).value =
+product.category;
+
+
+document.getElementById(
+"productDescription"
+).value =
+product.description;
+
+
+document.getElementById(
+"saveProductButton"
+).textContent =
+"Save Changes";
+
+
+document.getElementById(
+"cancelEditButton"
+).classList.remove(
+"hidden"
+);
+
+}
+
+
+/* =====================================================
+   CANCEL EDIT
+   ===================================================== */
+
+function cancelEdit(){
+
+resetProductForm();
+
+}
+
+
+/* =====================================================
+   RESET PRODUCT FORM
+   ===================================================== */
+
+function resetProductForm(){
+
+editingProductId =
+null;
+
+
+document.getElementById(
+"productForm"
+).reset();
+
+
+document.getElementById(
+"formTitle"
+).textContent =
+"Add New Product";
+
+
+document.getElementById(
+"saveProductButton"
+).textContent =
+"Add Product";
+
+
+document.getElementById(
+"cancelEditButton"
+).classList.add(
+"hidden"
+);
+
+}
+
+
+/* =====================================================
+   HIDE / SHOW PRODUCT
+   ===================================================== */
+
+function toggleProduct(id){
+
+const product =
+products.find(
+p => p.id === id
+);
+
+
+if(product){
+
+product.visible =
+!product.visible;
+
+saveProducts();
+
+displayCategories();
+
+displayProducts();
+
+displayOwnerProducts();
+
+}
+
+}
+
+
+/* =====================================================
+   DELETE PRODUCT
+   ===================================================== */
+
+function deleteProduct(id){
+
+const confirmDelete =
+confirm(
+"Remove this product permanently?"
+);
+
+
+if(!confirmDelete){
+
+return;
+
+}
+
+
+products =
+products.filter(
+product =>
+product.id !== id
+);
+
+
+saveProducts();
+
+displayCategories();
+
+displayProducts();
+
+displayOwnerProducts();
+
+}
+
+
+/* =====================================================
+   OWNER PRODUCT DISPLAY
+   ===================================================== */
+
+function displayOwnerProducts(){
+
+const container =
+document.getElementById(
+"ownerProducts"
+);
+
+
+container.innerHTML = "";
+
+
+if(products.length === 0){
+
+container.innerHTML = `
+
+<div class="empty">
+
+Your virtual shelf is empty.
+
+</div>
+
+`;
+
+return;
+
+}
+
+
+products.forEach(product => {
+
+const item =
+document.createElement("div");
+
+item.className =
+"owner-product";
+
+
+item.innerHTML = `
+
+${
+product.image
+
+?
+
+`<img
+src="${product.image}"
+alt="${escapeHTML(product.name)}">`
+
+:
+
+""
+
+}
+
+
+<small>
+
+${escapeHTML(product.category)}
+
+·
+
+<strong>
+
+${
+product.visible
+?
+"Visible"
+:
+"Hidden"
+}
+
+</strong>
+
+</small>
+
+
+<h3>
+
+${escapeHTML(product.name)}
+
+</h3>
+
+
+<p class="muted">
+
+${escapeHTML(product.description)}
+
+</p>
+
+
+<div class="owner-actions">
+
+
+<button
+onclick="editProduct(${product.id})"
+>
+
+Edit
+
+</button>
+
+
+<button
+onclick="toggleProduct(${product.id})"
+>
+
+${
+product.visible
+?
+"Hide"
+:
+"Show"
+}
+
+</button>
+
+
+<button
+class="delete"
+onclick="deleteProduct(${product.id})"
+>
+
+Remove
+
+</button>
+
+
+</div>
+
+`;
+
+
+container.appendChild(item);
+
+});
+
+}
+
+
+/* =====================================================
+   CUSTOMER REQUESTS
+   ===================================================== */
+
+function renderCustomerRequests(){
+
+const container =
+document.getElementById(
+"customerRequests"
+);
+
+
+let requests =
+
+JSON.parse(
+localStorage.getItem(
+REQUEST_DATABASE
+)
+) || [];
+
+
+container.innerHTML = "";
+
+
+if(requests.length === 0){
+
+container.innerHTML = `
+
+<p class="muted">
+
+No customer requests yet.
+
+</p>
+
+`;
+
+return;
+
+}
+
+
+requests.forEach(
+(request,index) => {
+
+const item =
+document.createElement(
+"div"
+);
+
+item.className =
+"request-card";
+
+
+item.innerHTML = `
+
+<strong>
+
+${escapeHTML(request.product)}
+
+</strong>
+
+<br><br>
+
+Customer:
+${escapeHTML(request.name)}
+
+<br>
+
+WhatsApp:
+${escapeHTML(request.phone)}
+
+<br>
+
+Quantity:
+${escapeHTML(request.quantity)}
+
+<br>
+
+Description:
+${escapeHTML(request.description)}
+
+<br>
+
+<small>
+
+${escapeHTML(request.date)}
+
+</small>
+
+<br><br>
+
+<button
+onclick="deleteRequest(${index})"
+>
+
+Remove Request
+
+</button>
+
+`;
+
+container.appendChild(item);
+
+});
+
+}
+
+
+/* =====================================================
+   DELETE REQUEST
+   ===================================================== */
+
+function deleteRequest(index){
+
+let requests =
+
+JSON.parse(
+localStorage.getItem(
+REQUEST_DATABASE
+)
+) || [];
+
+
+requests.splice(
+index,
+1
+);
+
+
+localStorage.setItem(
+REQUEST_DATABASE,
+JSON.stringify(requests)
+);
+
+
+renderCustomerRequests();
+
+}
+
+
+/* =====================================================
+   START WEBSITE
+   ===================================================== */
+
+displayCategories();
+
+displayProducts();
+
+
+if(
+sessionStorage.getItem(
+LOGIN_DATABASE
+) === "true"
+){
+
+openDashboard();
+
+}
+
+</script>
+
+</body>
+</html>
