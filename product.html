@@ -1,1 +1,22 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>Product | Spaza</title><link rel="stylesheet" href="css/style.css"></head><body><header class="header compact"><a class="brand" href="index.html"><img src="images/spaza-logo.png" alt="Spaza"></a><div class="search-wrap"><input id="searchInput" type="search" placeholder="Search products..."><button id="searchBtn" class="search-btn">🔍</button></div><div class="header-actions"><a href="login.html">👤 Account</a><a href="cart.html">🛒 Cart <b id="cartCount">0</b></a></div></header><nav class="nav"><button class="menu-btn" id="menuBtn">☰</button><div class="nav-links"><a href="index.html">Home</a><a href="shop.html">Shop</a><a href="shop.html?deals=true">Deals</a><a href="partner.html">Become a Partner</a><a href="help.html">Help</a></div></nav><aside class="drawer" id="drawer"><div class="drawer-head"><strong>SPAZA MENU</strong><button id="closeMenu">✕</button></div><a href="index.html">🏠 Home</a><a href="shop.html">🛍️ Shop</a><a href="cart.html">🛒 Cart</a><a href="login.html">👤 Account</a><a href="orders.html">📦 Orders</a><a href="partner.html">🤝 Become a Partner</a><a href="help.html">❓ Help</a></aside><div class="overlay" id="overlay"></div><main class="product-page"><div class="breadcrumbs">Home / Shop / Product</div><div id="productDetails"></div></main><footer><div class="footer-bottom">© 2026 Spaza · Modern • Trusted • Local</div></footer><script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><script src="supabase-config.js"></script><script src="js/app.js"></script></body></html>
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="Compare seller offers on Spaza."><title>Product | Spaza</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<header class="site-header compact">
+  <a class="brand" href="index.html"><img src="images/spaza-logo.png" alt="Spaza"></a>
+  <div class="search-wrap"><input id="searchInput" type="search" placeholder="Search products, brands and categories..." aria-label="Search products"><button id="searchBtn" class="search-btn" aria-label="Search">⌕</button></div>
+  <div class="header-actions"><a href="login.html">Account</a><a href="cart.html">Cart <b id="cartCount">0</b></a></div>
+</header>
+<nav class="nav"><button class="menu-btn" id="menuBtn" aria-label="Open menu">☰</button><div class="nav-links"><a href="index.html">Home</a><a href="shop.html">Shop</a><a href="categories.html">Categories</a><a href="shop.html?deals=true">Deals</a><a href="partner.html">Become a Partner</a><a href="help.html">Help &amp; Support</a></div></nav>
+<aside class="drawer" id="drawer"><div class="drawer-head"><strong>SPAZA MENU</strong><button id="closeMenu">✕</button></div><a href="index.html">Home</a><a href="shop.html">Shop All</a><a href="categories.html">Categories</a><a href="shop.html?deals=true">Deals</a><a href="cart.html">Cart</a><a href="login.html">My Account</a><a href="orders.html">My Orders</a><a href="partner.html">Become a Partner</a><a href="help.html">Help &amp; Support</a></aside><div class="overlay" id="overlay"></div>
+<main class="product-page">
+  <div class="breadcrumbs"><a href="index.html">Home</a> / <a href="shop.html">Shop</a> / Product</div>
+  <div id="productDetails"><div class="empty"><h2>Loading product...</h2></div></div>
+</main>
+<footer><strong>SPAZA</strong><p>Modern • Trusted • Local marketplace</p><div><a href="shop.html">Shop</a> · <a href="categories.html">Categories</a> · <a href="partner.html">Partners</a> · <a href="help.html">Help</a></div></footer>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><script src="supabase-config.js"></script><script src="js/app.js"></script>
+</body></html>
