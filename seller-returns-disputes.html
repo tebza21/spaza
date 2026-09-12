@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Returns & Disputes | Seller Centre | Spaza</title>
+<link rel="stylesheet" href="css/style.css">
+<style>
+.wrap{max-width:1180px;margin:0 auto;padding:32px 20px 70px}.toolbar{display:flex;gap:12px;flex-wrap:wrap;margin:22px 0}.toolbar input,.toolbar select{padding:12px;border:1px solid #ddd;border-radius:8px}.table-wrap{overflow:auto}.data-table{width:100%;border-collapse:collapse}.data-table th,.data-table td{text-align:left;padding:14px;border-bottom:1px solid #eee;white-space:nowrap}.status{display:inline-block;padding:5px 9px;border-radius:999px;background:#f1f1f1;font-size:12px}.cards{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin:24px 0}.stat{padding:20px;border:1px solid #e5e5e5;border-radius:12px;background:#fff}.stat strong{display:block;font-size:26px;margin-top:8px}.empty{text-align:center;padding:50px 20px;color:#666}.notice{padding:18px;border-radius:10px;background:#f7f7f7;margin:20px 0}@media(max-width:800px){.cards{grid-template-columns:repeat(2,1fr)}.wrap{padding:22px 14px 50px}}@media(max-width:500px){.cards{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<header class="site-header"><a class="logo-wrap" href="index.html"><img class="site-logo" src="images/spaza-logo.png" alt="Spaza"></a><button class="menu-button" id="menuButton">☰</button><div class="header-actions"><a href="seller-centre.html">Seller Centre</a><a href="account.html">Account</a></div></header>
+<main class="wrap">
+<p class="eyebrow">SELLER CENTRE</p><h1>Returns & Disputes</h1><p class="page-intro">Respond to customer after-sales cases, provide evidence and keep resolutions connected to the original order.</p>
+<div id="gate" class="notice">Checking seller access…</div>
+<section id="content" hidden>
+<div class="cards"><div class="stat"><span>Open returns</span><strong id="returnsCount">—</strong></div><div class="stat"><span>Open disputes</span><strong id="disputesCount">—</strong></div><div class="stat"><span>Awaiting response</span><strong id="responseCount">—</strong></div><div class="stat"><span>Resolved</span><strong id="resolvedCount">—</strong></div></div>
+<div class="toolbar"><input id="search" type="search" placeholder="Search reference or order"><select id="caseType"><option value="">All cases</option><option value="return">Returns</option><option value="dispute">Disputes</option></select><select id="status"><option value="">All statuses</option><option>SUBMITTED</option><option>UNDER_REVIEW</option><option>AWAITING_SELLER_RESPONSE</option><option>INFORMATION_REQUESTED</option><option>DECISION</option><option>RESOLVED</option></select></div>
+<div id="tableArea" class="card"><div class="empty">Loading cases…</div></div>
+</section></main>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><script src="supabase-config.js"></script>
+<script>
+const db=SpazaDB;let sellerId=null,cases=[];
+const esc=v=>String(v??'').replace(/[&<>\"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const money=(v,c='ZAR')=>new Intl.NumberFormat('en-ZA',{style:'currency',currency:c}).format(Number(v||0));
+async function load(){
+ const {data:{user}}=await db.auth.getUser(); if(!user){location.href='login.html?role=vendor';return;}
+ const {data:roles,error:roleError}=await db.from('profile_roles').select('roles(name,code)').eq('profile_id',user.id); if(roleError) throw roleError;
+ const ok=(roles||[]).some(x=>['SELLER','PARTNER'].includes(String(x.roles?.code||x.roles?.name||'').toUpperCase())); if(!ok){document.getElementById('gate').innerHTML='<strong>Seller access is not active.</strong><p>Seller approval is required before managing after-sales cases.</p>';return;}
+ const {data:seller,error:sellerError}=await db.from('sellers').select('id').eq('profile_id',user.id).maybeSingle(); if(sellerError) throw sellerError; if(!seller){document.getElementById('gate').innerHTML='<strong>Seller profile not found.</strong>';return;} sellerId=seller.id;
+ document.getElementById('gate').remove();document.getElementById('content').hidden=false;
+ const [r,d]=await Promise.all([
+   db.from('returns').select('*').eq('seller_id',sellerId).order('created_at',{ascending:false}),
+   db.from('disputes').select('*').eq('seller_id',sellerId).order('created_at',{ascending:false})
+ ]); if(r.error) throw r.error;if(d.error) throw d.error;
+ cases=[...(r.data||[]).map(x=>({...x,case_type:'return'})),...(d.data||[]).map(x=>({...x,case_type:'dispute'}))].sort((a,b)=>new Date(b.created_at)-new Date(a.created_at));render();
+}
+function render(){
+ const open=cases.filter(x=>!['RESOLVED','CLOSED','CANCELLED'].includes(String(x.status||'').toUpperCase()));
+ document.getElementById('returnsCount').textContent=cases.filter(x=>x.case_type==='return'&&!['RESOLVED','CLOSED','CANCELLED'].includes(String(x.status||'').toUpperCase())).length;
+ document.getElementById('disputesCount').textContent=cases.filter(x=>x.case_type==='dispute'&&!['RESOLVED','CLOSED','CANCELLED'].includes(String(x.status||'').toUpperCase())).length;
+ document.getElementById('responseCount').textContent=cases.filter(x=>String(x.status||'').toUpperCase()==='AWAITING_SELLER_RESPONSE').length;
+ document.getElementById('resolvedCount').textContent=cases.filter(x=>['RESOLVED','CLOSED'].includes(String(x.status||'').toUpperCase())).length;
+ const q=document.getElementById('search').value.toLowerCase(),t=document.getElementById('caseType').value,s=document.getElementById('status').value.toUpperCase();
+ const rows=cases.filter(x=>(!t||x.case_type===t)&&(!s||String(x.status||'').toUpperCase()===s)&&(!q||JSON.stringify(x).toLowerCase().includes(q)));
+ if(!rows.length){document.getElementById('tableArea').innerHTML='<div class="empty"><strong>No return or dispute cases found.</strong><p>When customers submit an after-sales case for one of your orders, it will appear here.</p></div>';return;}
+ document.getElementById('tableArea').innerHTML='<div class="table-wrap"><table class="data-table"><thead><tr><th>Type</th><th>Reference</th><th>Order</th><th>Status</th><th>Amount</th><th>Created</th><th>Action</th></tr></thead><tbody>'+rows.map(x=>'<tr><td>'+esc(x.case_type==='return'?'Return':'Dispute')+'</td><td>'+esc(x.return_number||x.dispute_number||x.reference_number||x.id)+'</td><td>'+esc(x.order_id||'—')+'</td><td><span class="status">'+esc(x.status||'—')+'</span></td><td>'+money(x.amount,x.currency||'ZAR')+'</td><td>'+new Date(x.created_at).toLocaleString('en-ZA')+'</td><td><button class="button" onclick="viewCase(\''+esc(x.id)+'\',\''+x.case_type+'\')">View</button></td></tr>').join('')+'</tbody></table></div>';
+}
+window.viewCase=(id,type)=>{const x=cases.find(c=>c.id===id&&c.case_type===type);if(!x)return;alert((type==='return'?'Return':'Dispute')+' '+(x.return_number||x.dispute_number||x.id)+'\n\nStatus: '+(x.status||'—')+'\nOrder: '+(x.order_id||'—')+'\nReason: '+(x.reason||'—')+'\nAmount: '+money(x.amount,x.currency||'ZAR')+'\n\nCase actions will be connected to the secure seller response workflow next.');};
+['search','caseType','status'].forEach(id=>document.getElementById(id).addEventListener('input',render));load().catch(e=>{document.getElementById('gate').innerHTML='<strong>Could not load returns and disputes.</strong><p>'+esc(e.message)+'</p>';});
+</script></body></html>
