@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="Spaza Customer Centre">
+<title>Customer Dashboard | Spaza</title>
+<link rel="stylesheet" href="css/style.css">
+<style>
+.customer-shell{max-width:1280px;margin:0 auto;padding:32px 20px 64px}.customer-top{display:flex;justify-content:space-between;align-items:flex-end;gap:20px;margin-bottom:26px}.customer-top h1{margin:.15rem 0}.customer-top p{margin:0;color:var(--muted,#687080)}.customer-actions{display:flex;gap:10px;flex-wrap:wrap}.customer-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px;margin-bottom:22px}.customer-card{background:#fff;border:1px solid #e6e9ee;border-radius:18px;padding:20px;box-shadow:0 8px 28px rgba(0,0,0,.05)}.customer-card h2,.customer-card h3{margin:0 0 8px}.customer-card p{color:#697386;margin:0;line-height:1.55}.customer-stat strong{display:block;font-size:28px;margin-top:8px}.customer-stat small{color:#697386}.customer-layout{display:grid;grid-template-columns:1.5fr 1fr;gap:20px}.customer-list{display:grid;gap:10px;margin-top:16px}.customer-link{display:flex;justify-content:space-between;align-items:center;padding:15px;border:1px solid #e6e9ee;border-radius:13px;text-decoration:none;color:inherit}.customer-link:hover{border-color:#18b83a}.empty-state{border:1px dashed #cfd5dd;border-radius:14px;padding:28px;text-align:center;margin-top:16px}.empty-state h3{margin:0 0 6px}.customer-icon{font-size:25px}.status-note{display:inline-block;margin-top:10px;padding:5px 9px;border-radius:999px;background:#f1f3f5;color:#596273;font-size:12px}.customer-footer{margin-top:20px;text-align:center;color:#697386}.customer-footer a{color:inherit}.customer-menu{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:22px}.customer-menu a{padding:9px 13px;border-radius:999px;text-decoration:none;color:#313946;background:#f1f3f5}.customer-menu a.active{background:#16a637;color:#fff}@media(max-width:900px){.customer-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.customer-layout{grid-template-columns:1fr}}@media(max-width:600px){.customer-shell{padding:22px 14px 45px}.customer-top{display:block}.customer-actions{margin-top:16px}.customer-grid{grid-template-columns:1fr 1fr;gap:10px}.customer-card{padding:16px}.customer-stat strong{font-size:23px}.customer-menu{overflow:auto;flex-wrap:nowrap;padding-bottom:4px}.customer-menu a{white-space:nowrap}}
+</style>
+</head>
+<body>
+<header class="site-header">
+  <button class="menu-button" id="menuButton" aria-label="Open menu">☰</button>
+  <a class="logo-wrap" href="index.html"><img class="site-logo" src="images/spaza-logo.png" alt="Spaza"></a>
+  <form class="site-search" id="dashboardSearch"><input id="searchInput" type="search" placeholder="Search products, brands and categories..." autocomplete="off"><button type="submit" aria-label="Search">⌕</button></form>
+  <div class="header-actions"><a href="shop.html">Shop</a><a href="cart.html">Cart <span id="cartCount">0</span></a><a href="account.html">Account</a></div>
+</header>
+<nav class="main-nav"><div class="nav-inner"><a href="index.html">Home</a><a href="shop.html">Shop</a><a href="shop.html">Categories</a><a href="shop.html?deals=true">Deals</a><a href="partner.html">Become a Partner</a><a href="help.html">Help &amp; Support</a></div></nav>
+<aside class="drawer" id="drawer" aria-hidden="true"><div class="drawer-head"><strong>SPAZA MENU</strong><button id="closeDrawer" aria-label="Close menu">×</button></div><a href="index.html">Home</a><a href="shop.html">Shop All</a><a href="shop.html">Categories</a><a href="shop.html?deals=true">Deals</a><a href="cart.html">Cart</a><a href="customer-dashboard.html">Customer Dashboard</a><a href="account.html">My Account</a><a href="partner.html">Become a Partner</a><a href="help.html">Help &amp; Support</a></aside><div class="overlay" id="overlay"></div>
+<main class="customer-shell">
+  <div class="customer-top">
+    <div><p class="eyebrow">CUSTOMER CENTRE</p><h1 id="welcome">Welcome back!</h1><p>Manage your Spaza shopping journey from one place.</p></div>
+    <div class="customer-actions"><a class="button primary" href="shop.html">Shop Now →</a><a class="button secondary" href="account.html">My Account</a></div>
+  </div>
+  <div class="customer-menu"><a class="active" href="customer-dashboard.html">Dashboard</a><a href="shop.html">Shop</a><a href="cart.html">Cart</a><a href="account.html">Account</a><a href="help.html">Help</a></div>
+
+  <section class="customer-grid" aria-label="Customer overview">
+    <article class="customer-card customer-stat"><span class="customer-icon">🛒</span><strong id="cartStat">0</strong><small>Items in cart</small></article>
+    <article class="customer-card customer-stat"><span class="customer-icon">📦</span><strong id="orderStat">0</strong><small>Total orders</small></article>
+    <article class="customer-card customer-stat"><span class="customer-icon">❤️</span><strong>—</strong><small>Wishlist</small><span class="status-note">Coming next</span></article>
+    <article class="customer-card customer-stat"><span class="customer-icon">📍</span><strong>—</strong><small>Saved addresses</small><span class="status-note">Coming next</span></article>
+  </section>
+
+  <section class="customer-layout">
+    <article class="customer-card">
+      <p class="eyebrow">YOUR SHOPPING</p><h2>Continue shopping</h2><p>Browse live products added by approved Spaza sellers. If the marketplace is empty, nothing is invented or preloaded.</p>
+      <div id="marketState" class="empty-state"><h3>Checking marketplace…</h3><p>Loading the current product catalogue.</p></div>
+    </article>
+    <article class="customer-card">
+      <p class="eyebrow">QUICK ACCESS</p><h2>What do you need?</h2>
+      <div class="customer-list">
+        <a class="customer-link" href="shop.html"><span>🔎 Browse products</span><span>→</span></a>
+        <a class="customer-link" href="cart.html"><span>🛒 Open cart</span><span>→</span></a>
+        <a class="customer-link" href="account.html"><span>👤 Manage account</span><span>→</span></a>
+        <a class="customer-link" href="help.html"><span>💬 Get help</span><span>→</span></a>
+      </div>
+    </article>
+  </section>
+
+  <section class="customer-card" style="margin-top:20px">
+    <p class="eyebrow">RECENT ORDERS</p><h2>Your orders</h2>
+    <div id="ordersState" class="empty-state"><h3>No orders yet</h3><p>Your orders will appear here after you complete a purchase.</p></div>
+  </section>
+  <p class="customer-footer"><a href="index.html">← Back to Spaza marketplace</a></p>
+</main>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="supabase-config.js"></script>
+<script>
+const esc=v=>String(v??'').replace(/[&<>\"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','\"':'&quot;'}[c]));
+async function init(){
+  const {data:{user},error}=await SpazaDB.auth.getUser();
+  if(error||!user){location.href='login.html?role=customer';return;}
+  const name=user.user_metadata?.full_name||user.email?.split('@')[0]||'Customer';
+  document.getElementById('welcome').textContent=`Welcome back, ${name}!`;
+  const {count:orderCount}=await SpazaDB.from('orders').select('id',{count:'exact',head:true}).eq('profile_id',user.id);
+  document.getElementById('orderStat').textContent=String(orderCount||0);
+  const {count:productCount}=await SpazaDB.from('products').select('id',{count:'exact',head:true}).eq('status','ACTIVE');
+  const market=document.getElementById('marketState');
+  if((productCount||0)>0){market.innerHTML='<h3>Live products are available</h3><p>Explore the current marketplace and compare seller offers.</p><a class="button primary" href="shop.html" style="display:inline-block;margin-top:12px">Browse Shop →</a>'}
+  else{market.innerHTML='<h3>No products yet</h3><p>Approved sellers will create products through Seller Centre. They will appear here once available.</p>'}
+  const {count:cartCount}=await SpazaDB.from('cart_items').select('id',{count:'exact',head:true}).eq('cart_id', (await SpazaDB.from('carts').select('id').eq('profile_id',user.id).maybeSingle()).data?.id||'00000000-0000-0000-0000-000000000000');
+  document.getElementById('cartStat').textContent=String(cartCount||0);
+  document.getElementById('cartCount').textContent=String(cartCount||0);
+  document.getElementById('dashboardSearch').addEventListener('submit',e=>{e.preventDefault();const q=document.getElementById('searchInput').value.trim();location.href=q?`shop.html?search=${encodeURIComponent(q)}`:'shop.html'});
+  document.getElementById('menuButton')?.addEventListener('click',()=>{document.getElementById('drawer').classList.add('open');document.getElementById('overlay').classList.add('show')});
+  document.getElementById('closeDrawer')?.addEventListener('click',closeMenu);document.getElementById('overlay')?.addEventListener('click',closeMenu);
+}
+function closeMenu(){document.getElementById('drawer').classList.remove('open');document.getElementById('overlay').classList.remove('show')}
+document.addEventListener('DOMContentLoaded',init);
+</script>
+</body>
+</html>
