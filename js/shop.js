@@ -1,12 +1,13 @@
 document.addEventListener('DOMContentLoaded', async () => {
   if (!window.SpazaDB || !document.getElementById('categoryFilter')) return;
   const filter = document.getElementById('categoryFilter');
+  const sort = document.getElementById('sortFilter');
   const params = new URLSearchParams(location.search);
   const selected = params.get('category') || 'all';
-  const { data: categories, error } = await SpazaDB.from('categories').select('id,name').order('name');
+  const { data: categories, error } = await SpazaDB.from('categories').select('id,name').eq('is_active', true).order('name');
   if (error) { console.error(error); return; }
-  filter.innerHTML = '<option value="all">All categories</option>' +
-    (categories || []).map(c => `<option value="${String(c.name).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/\"/g,'&quot;')}">${String(c.name).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')}</option>`).join('');
+  const esc = value => String(value ?? '').replace(/[&<>\"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','\"':'&quot;',"'":'&#39;'}[c]));
+  filter.innerHTML = '<option value="all">All categories</option>' + (categories || []).map(c => `<option value="${esc(c.name)}">${esc(c.name)}</option>`).join('');
   if ([...filter.options].some(o => o.value === selected)) filter.value = selected;
   filter.addEventListener('change', () => {
     const url = new URL(location.href);
@@ -15,6 +16,9 @@ document.addEventListener('DOMContentLoaded', async () => {
     url.searchParams.delete('q');
     location.href = url.toString();
   });
+  sort?.addEventListener('change', () => window.Spaza?.renderShop());
+  const clear = document.getElementById('clearFilters');
+  clear?.addEventListener('click', () => { location.href = 'shop.html'; });
   const show = document.getElementById('showFilters');
   const panel = document.getElementById('filtersPanel');
   show?.addEventListener('click', () => panel?.classList.toggle('open'));
